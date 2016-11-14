@@ -1,0 +1,47 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.ion-md-custom-car, .ion-ios-custom-car, .ion-ios-custom-car-outline	{
+	background-image: url("../assets/img/car.png");
+    display: block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.ion-md-custom-my, .ion-ios-custom-my, .ion-ios-custom-my-outline	{
+	background-image: url("../assets/img/marchaahai.png");
+    display: block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.ion-md-custom-tedy, .ion-ios-custom-tedy, .ion-ios-custom-tedy-outline	{
+	background-image: url("../assets/img/tedy.png");
+    display: block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.ion-md-custom-car, .ion-md-custom-my, .ion-md-custom-tedy{
+    height: 20px;
+}
+ion-tabs.tabs-color-active-custom .tab-item.tab-item-active, ion-tabs.tabs-color-active-custom .tab-item.active, ion-tabs.tabs-color-active-custom .tab-item.activated {
+	background-color: #ffe300;
+}
+.no-padding {
+	padding: 0px !important;
+}

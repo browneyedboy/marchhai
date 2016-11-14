@@ -1,0 +1,39 @@
+page-lists{
+	ion-card{
+		width: calc(50% - 24px) !important;
+    	float: left;
+        margin: 12px 12px 12px 12px !important;
+        .card-title{
+			position: absolute;
+		    top: 12px;
+		    padding: 8px 10px;
+		    color: #fff;
+		    background: rgba(22, 187, 122, 0.65);;
+		    width: calc(50% - 24px);
+
+        }
+        img{
+        	height: 200px;
+        }
+        .card-subtitle{
+			position: relative;
+		    margin-top: -55px;
+		    padding: 8px 10px;
+		    color: #fff;
+		    background: rgba(22, 187, 122, 0.65);
+		    width: 100%;
+        }
+	}
+	.button-clear-md{
+	    padding: 0 20px;
+	    margin: 0;
+	    height: auto;
+	    color: #fff;
+	}
+	.play button{
+	    position: relative;
+	    margin-top: -235px;
+	    text-align: center;
+	    width: 100%;
+	}
+}
