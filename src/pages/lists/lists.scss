@@ -3,14 +3,14 @@ page-lists{
 		width: calc(50% - 24px) !important;
     	float: left;
         margin: 12px 12px 12px 12px !important;
+        position: relative;
         .card-title{
 			position: absolute;
-		    top: 12px;
+		    top: 0;
 		    padding: 8px 10px;
 		    color: #fff;
-		    background: rgba(22, 187, 122, 0.65);;
-		    width: calc(50% - 24px);
-
+		    background: rgba(22, 187, 122, 0.65);
+		    width: 100%;
         }
         img{
         	height: 200px;
