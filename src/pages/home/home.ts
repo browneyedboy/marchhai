@@ -17,7 +17,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, public http: Http) {
   		this.http.get('http://www.marchaahai.mn/index.php/api/categories?token=M@RCH@@KH@!@P!').map(
   		res => res.json()).subscribe(data => {
-	        this.categories = data.data.children;
+	        this.categories = data.response;
 	    },
 	    err => {
 	        console.log("Oops!");

@@ -10,7 +10,7 @@
     <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
     <div class="card-title">{{content.title}}</div>
     <div class="play">    
-        <button ion-button icon-only clear large (click)="playVideo(content.video)">
+        <button ion-button icon-only clear large (click)="playVideo(content.id ,content.video)">
             <ion-icon name="play"></ion-icon>
         </button>
     </div>
