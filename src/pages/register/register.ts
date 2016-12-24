@@ -43,21 +43,22 @@ export class RegisterPage {
 		console.log(this.registerform.value.useremail);  	
 		console.log(this.registerform.value.userpassword);
 
-		var loginServiceData = JSON.stringify({
+		var loginServiceData = {
 			username: this.registerform.value.username,
-		    email: this.registerform.value.useremail,
-		    password: this.registerform.value.userpassword,
+		    email: this.registerform.value.useremail,   
 		    phone_number: this.registerform.value.userphone,
 		    child_birthday: '2012-04-08', //this.registerform.value.userage,
 		    child_gender: this.registerform.value.usersex,
+		    password: this.registerform.value.userpassword,
 		    token: 'M@RCH@@KH@!@P!'
-		});
+		};
 		
-		this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData)
+		this.http.post('http://www.marchaahai.mn/index.php/api/signup', loginServiceData)
         .subscribe(data => {
         	console.log(data);
         }, error => {
             console.log("Oooops!");
+            console.log(error);
         });
 
 		// this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData).map(
