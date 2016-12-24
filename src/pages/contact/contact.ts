@@ -11,5 +11,8 @@ export class ContactPage {
   constructor(public navCtrl: NavController) {
 
   }
+  exitApp(){
+    this.platform.exitApp();
+  }
 
 }
