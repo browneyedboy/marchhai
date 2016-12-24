@@ -14,37 +14,53 @@
 
 
 <ion-content>
+<form [formGroup]="registerform" (ngSubmit)="registerdo()">
   <ion-list>
 
   <ion-item>
     <ion-label floating>Нэр</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" formControlName="username"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label floating>Имэйл хаяг</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label floating >Имэйл хаяг</ion-label>
+    <ion-input type="text" formControlName="useremail"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Утас</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" formControlName="userphone"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Нас</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-select formControlName="userage">
+      <ion-option value="1">1</ion-option>
+      <ion-option value="2">2</ion-option>
+      <ion-option value="3">4</ion-option>
+      <ion-option value="4">5</ion-option>
+      <ion-option value="5">6</ion-option>
+      <ion-option value="6">6</ion-option>
+      <ion-option value="7">7</ion-option>
+      <ion-option value="10">10</ion-option>
+      <ion-option value="11">11</ion-option>
+      <ion-option value="12">12</ion-option>
+    </ion-select>
   </ion-item>
   <ion-item>
     <ion-label floating>Хүйс</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-select formControlName="usersex">
+      <ion-option value="male">Эрэгтэй</ion-option>
+      <ion-option value="female">Эмэгтэй</ion-option>
+    </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Нууц үг</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-input type="password" formControlName="userpassword"></ion-input>
   </ion-item>
 
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block>Бүртгүүлэх</button>
+    <button ion-button color="primary" type="submit" block [disabled]="!registerform.valid">Бүртгүүлэх</button>
   </div>
+</form>
 </ion-content>
