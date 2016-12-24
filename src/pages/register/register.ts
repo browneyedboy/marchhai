@@ -48,7 +48,7 @@ export class RegisterPage {
 		    email: this.registerform.value.useremail,
 		    password: this.registerform.value.userpassword,
 		    phone_number: this.registerform.value.userphone,
-		    child_birthday: this.registerform.value.userage,
+		    child_birthday: '2012-04-08', //this.registerform.value.userage,
 		    child_gender: this.registerform.value.usersex,
 		    token: 'M@RCH@@KH@!@P!'
 		});
