@@ -5,7 +5,8 @@
 </ion-header>
   
 <ion-content>
-	<video width="320" height="240" autoplay>
-	  <source src="{{video}}" type="video/mp4">
+	<video width="320" height="240" controls preload="none" autoplay>
+		<param name="allowfullscreen" value="true" />
+	  	<source src="{{video}}" type="video/mp4">
 	</video>
 </ion-content>

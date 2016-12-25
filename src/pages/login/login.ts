@@ -7,6 +7,8 @@ import { TabsPage } from '../tabs/tabs';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import {global} from "../../app/global";
+
 
 @Component({
   selector: 'page-login',
@@ -14,7 +16,7 @@ import 'rxjs/add/operator/map';
 })
 export class LoginPage {
 	todo: FormGroup;
-  constructor(public navCtrl: NavController, public http: Http) {
+  	constructor(public navCtrl: NavController, public http: Http) {
   	this.todo = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -33,23 +35,38 @@ export class LoginPage {
   dologin(){
   	// index.php/api/login
   	//{email: <USER EMAIL>, password: <USER PASSWORD>, token=<M@RCH@@KH@!@P!>}
-	console.log(this.todo.value.email);  	
-	console.log(this.todo.value.password);
+  	
+	//global.userdetailget();
 
-	this.navCtrl.push(TabsPage);
 
-	// var loginServiceData = {
-	//     email: this.email,
-	//     password: this.password,
-	//     token: 'M@RCH@@KH@!@P!'
-	// };
+	var loginServiceData = {
+	    email: this.todo.value.email,
+	    password: this.todo.value.password,
+	    token: 'M@RCH@@KH@!@P!'
+	};
 
-	// 	this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData).map(
-		// res => res.json()).subscribe(data => {
-	//       console.log(data.response);
-	//   },
-	//   err => {
-	//       console.log("Oops!");
-	//   });
+	this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData)
+	.subscribe(data => {
+		console.log('userlogged in');
+		console.log(data.status);
+
+	  
+	  // console.log(data['_body']);
+	  var body = JSON.parse(data['_body'])
+	  global.userdetail(body.response);
+	  // console.log(data['_body']['response']);
+	  // console.log(data['_body']);
+	  console.log( body.response.id );
+	  console.log( body.response.username );
+	  // console.log(data['_body'].response.username);
+	  this.navCtrl.push(TabsPage);
+	  console.log( global.userdetailget() );
+	  console.log('all globals ');
+	  console.log( global );
+	},
+	err => {
+	  console.log("Oops!");
+	  console.log(err);
+	});
   }
 }

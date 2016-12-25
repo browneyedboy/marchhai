@@ -4,12 +4,8 @@ import {Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-/*
-  Generated class for the Register page.
+import { TabsPage } from '../tabs/tabs';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
@@ -47,7 +43,7 @@ export class RegisterPage {
 			username: this.registerform.value.username,
 		    email: this.registerform.value.useremail,   
 		    phone_number: this.registerform.value.userphone,
-		    child_birthday: '2012-04-08', //this.registerform.value.userage,
+		    child_birthday: this.registerform.value.userage, //2012-04-08
 		    child_gender: this.registerform.value.usersex,
 		    password: this.registerform.value.userpassword,
 		    token: 'M@RCH@@KH@!@P!'
@@ -55,9 +51,11 @@ export class RegisterPage {
 		
 		this.http.post('http://www.marchaahai.mn/index.php/api/signup', loginServiceData)
         .subscribe(data => {
+        	console.log('registered');
         	console.log(data);
+        	this.navCtrl.push(TabsPage);
         }, error => {
-            console.log("Oooops!");
+            console.log('oops');
             console.log(error);
         });
 
