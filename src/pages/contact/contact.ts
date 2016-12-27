@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import {global} from "../../app/global";
 import { ChangepassPage } from "../changepass/changepass";
+import { HelpPage } from '../help/help';
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
@@ -25,5 +26,8 @@ export class ContactPage {
   }
   changepassword(){
   	this.navCtrl.push(ChangepassPage);
+  }
+  gotohelp(){
+    this.navCtrl.push(HelpPage);
   }
 }

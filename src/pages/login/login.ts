@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App, ViewController } from 'ionic-angular';
 import {Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
@@ -16,7 +16,7 @@ import {global} from "../../app/global";
 })
 export class LoginPage {
 	todo: FormGroup;
-  	constructor(public navCtrl: NavController, public http: Http) {
+  	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App) {
   	this.todo = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -44,20 +44,21 @@ export class LoginPage {
 
 	this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData)
 	.subscribe(data => {
-		console.log('userlogged in');
-		// console.log(data.status);
-	  
-	  // console.log(data['_body']);
-	  var body = JSON.parse(data['_body'])
-	  global.userdetail(body.response);
+			console.log('userlogged in');
+			// console.log(data.status);
 
-	  // console.log(body.response);
+			// console.log(data['_body']);
+			var body = JSON.parse(data['_body'])
+			global.userdetail(body.response);
 
-	  this.navCtrl.push(TabsPage);
+			// console.log(body.response);
 
-	},
-	err => {
-	  console.log("Oops!");
-	});
+			//this.navCtrl.push(TabsPage);
+			this.viewCtrl.dismiss();
+      		this.appCtrl.getRootNav().push(TabsPage);
+		},
+		err => {
+		  console.log("Oops!");
+		});
   }
 }
