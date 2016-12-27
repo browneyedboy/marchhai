@@ -5,6 +5,7 @@ import {Validators, FormGroup, FormControl } from '@angular/forms';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { TabsPage } from '../tabs/tabs';
+import {global} from "../../app/global";
 
 @Component({
   selector: 'page-register',
@@ -51,12 +52,11 @@ export class RegisterPage {
 		
 		this.http.post('http://www.marchaahai.mn/index.php/api/signup', loginServiceData)
         .subscribe(data => {
-        	console.log('registered');
-        	console.log(data);
+        	var body = JSON.parse(data['_body'])
+	  		global.userdetail(body.response);
         	this.navCtrl.push(TabsPage);
         }, error => {
             console.log('oops');
-            console.log(error);
         });
 
 		// this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData).map(

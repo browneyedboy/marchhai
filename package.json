@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "Marchaahai",
+  "author": "Marchaahai",
+  "homepage": "http://marchaahai.mn/",
   "private": true,
   "scripts": {
     "build": "ionic-app-scripts build",
@@ -46,9 +46,9 @@
     "ios",
     {
       "platform": "ios",
-      "version": "",
+      "version": "10.1",
       "locator": "ios"
     }
   ],
-  "description": "myapp: An Ionic project"
+  "description": "marchaahai: An Ionic project"
 }

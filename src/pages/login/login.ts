@@ -35,9 +35,6 @@ export class LoginPage {
   dologin(){
   	// index.php/api/login
   	//{email: <USER EMAIL>, password: <USER PASSWORD>, token=<M@RCH@@KH@!@P!>}
-  	
-	//global.userdetailget();
-
 
 	var loginServiceData = {
 	    email: this.todo.value.email,
@@ -49,24 +46,18 @@ export class LoginPage {
 	.subscribe(data => {
 		console.log('userlogged in');
 		console.log(data.status);
-
 	  
 	  // console.log(data['_body']);
 	  var body = JSON.parse(data['_body'])
 	  global.userdetail(body.response);
-	  // console.log(data['_body']['response']);
-	  // console.log(data['_body']);
-	  console.log( body.response.id );
-	  console.log( body.response.username );
-	  // console.log(data['_body'].response.username);
+
+	  console.log(body.response);
+
 	  this.navCtrl.push(TabsPage);
-	  console.log( global.userdetailget() );
-	  console.log('all globals ');
-	  console.log( global );
+
 	},
 	err => {
 	  console.log("Oops!");
-	  console.log(err);
 	});
   }
 }

@@ -9,6 +9,7 @@ import { ListPage } from '../pages/lists/lists';
 import { PlayerPage } from '../pages/player/player';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { ChangepassPage } from "../pages/changepass/changepass";
 @NgModule({
   declarations: [
     MyApp,
@@ -19,7 +20,8 @@ import { RegisterPage } from '../pages/register/register';
     ListPage,
     PlayerPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ChangepassPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,7 +36,8 @@ import { RegisterPage } from '../pages/register/register';
     ListPage,
     PlayerPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ChangepassPage
   ],
   providers: []
 })

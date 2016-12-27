@@ -11,9 +11,11 @@
       <ion-list-header>
         Хувийн мэдээлэл
       </ion-list-header>
-      <ion-item>Хангай Хүрэлбаатар</ion-item>
-      <ion-item>khangai@alchemist</ion-item>
-      <ion-item>Нууц үг солих</ion-item>
+      <ion-item>{{ username }}</ion-item>
+      <ion-item>{{ email }}</ion-item>
+      <ion-item>
+        <button ion-button clear full (click)="changepassword()">Нууц үг солих</button>
+      </ion-item>
     </ion-list>
 
     <ion-list>
