@@ -3,43 +3,30 @@
       <ion-segment-button value="saved">
         Хадгалсан
       </ion-segment-button>
-      <ion-segment-button value="download">
+      <!-- <ion-segment-button value="download">
         Татаж авсан
-      </ion-segment-button>
+      </ion-segment-button> -->
     </ion-segment>
 </ion-header>
 
 <ion-content>
   <div [ngSwitch]="cond">
     <ion-list *ngSwitchCase="'saved'" no-lines>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Үнэнч найзууд</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Цэцэрлэгтээ хамт явнадаа</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Онсого 3</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Шинэ жилийн баяр</h2>
-      </ion-item>
+        <ion-item  *ngFor="let content of contents">
+            <ion-thumbnail item-left>
+                <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture">
+            </ion-thumbnail>
+            <div class="play">    
+                <button ion-button icon-only clear large (click)="playVideo(content.id ,content.video)">
+                    <ion-icon name="play"></ion-icon>
+                </button>
+            </div>
+            <h2>{{content.title}}</h2>
+        </ion-item>
     </ion-list>
 
 
-    <ion-list *ngSwitchCase="'download'" no-lines>
+    <!-- <ion-list *ngSwitchCase="'download'" no-lines>
       <ion-item>
         <ion-thumbnail item-left>
           <img src="assets/img/friends.jpg">
@@ -64,6 +51,6 @@
         </ion-thumbnail>
         <h2>Шинэ жилийн баяр</h2>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
   </div>
 </ion-content>

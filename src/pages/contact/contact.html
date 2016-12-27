@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Хувийн мэдээлэл
-    </ion-title>
-  </ion-navbar>
+    <ion-toolbar>
+        <ion-buttons start>
+          <button ion-button icon-only>
+            <ion-icon name="help-circle"></ion-icon>
+          </button>
+        </ion-buttons>
+            <ion-title>Хувийн мэдээлэл</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
@@ -11,23 +16,21 @@
       <ion-list-header>
         Хувийн мэдээлэл
       </ion-list-header>
+      <ion-item class="item item-divider">Хэрэглэгчийн нэр</ion-item>
       <ion-item>{{ username }}</ion-item>
+      <ion-item class="item item-divider">Имэйл хаяг</ion-item>
       <ion-item>{{ email }}</ion-item>
+      <ion-item class="item item-divider">Утасны дугаар</ion-item>
+      <ion-item>{{ phone }}</ion-item>
       <ion-item>
         <button ion-button clear full (click)="changepassword()">Нууц үг солих</button>
-      </ion-item>
-    </ion-list>
-
-    <ion-list>
-      <ion-item>
-        <button ion-button clear full (click)="exitApp()">Гарах</button>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header>
         Багц дуусах огноо
       </ion-list-header>
-      <ion-item>2020-01-31 07:00:00</ion-item>
+      <ion-item>{{ expire_date }}</ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header>
@@ -36,5 +39,23 @@
       <ion-item>Чигчий бүүвэй багц 1-сар <button ion-button outline item-right icon-left>4.99$</button></ion-item>
       <ion-item>Дунд ноён багц 3-сар <button ion-button outline item-right icon-left>9.99$</button></ion-item>
       <ion-item>Эрхий мэргэн багц 6-сар <button ion-button outline item-right icon-left>19.99$</button></ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+        Та төгрөгөөр хийх гэж байгаа бол дараах дансанд төлбөрөө шилжүүлж 96668505 утасруу залгаж хэлээрэй.
+        </ion-item>
+        <ion-item>
+            <p>
+            Банкны нэр: Хасбанк <br>
+            Дансны нэр: Марчаахай ХХК <br>
+            Дансны дугаар: 5001032534 <br>
+            Дансны утга: Нэр, холбоо барих утасны дугаар <br>
+            </p>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <button ion-button clear full (click)="exitApp()">Гарах</button>
+      </ion-item>
     </ion-list>
 </ion-content>

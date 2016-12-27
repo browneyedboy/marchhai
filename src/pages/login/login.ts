@@ -45,13 +45,13 @@ export class LoginPage {
 	this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData)
 	.subscribe(data => {
 		console.log('userlogged in');
-		console.log(data.status);
+		// console.log(data.status);
 	  
 	  // console.log(data['_body']);
 	  var body = JSON.parse(data['_body'])
 	  global.userdetail(body.response);
 
-	  console.log(body.response);
+	  // console.log(body.response);
 
 	  this.navCtrl.push(TabsPage);
 

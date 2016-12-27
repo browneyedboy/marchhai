@@ -16,16 +16,18 @@
 <ion-content>
 <form [formGroup]="todo" (ngSubmit)="dologin()">
 	<ion-list>
+        <ion-item class="center">
+            <img src="../assets/img/marchaakhai-logo.png">
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Имэйл хаяг</ion-label>
+            <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label floating>Имэйл хаяг</ion-label>
-    <ion-input type="text" formControlName="email"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Нууц үг</ion-label>
-    <ion-input type="password" formControlName="password"></ion-input>
-  </ion-item>
+        <ion-item>
+            <ion-label floating>Нууц үг</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
 
 	</ion-list>
 

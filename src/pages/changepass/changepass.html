@@ -14,5 +14,23 @@
 
 
 <ion-content padding>
-	ChangepassPage
+<form [formGroup]="changepassword" (ngSubmit)="dochange()">
+	<ion-list>
+
+  <ion-item>
+    <ion-label floating>Нууц үг</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Нууц үг давт</ion-label>
+    <ion-input type="password" formControlName="repassword"></ion-input>
+  </ion-item>
+
+	</ion-list>
+
+	  	<div padding>
+	    	<button ion-button color="primary" block type="submit" [disabled]="!changepassword.valid">Нууц үг солих</button>
+	  	</div>
+</form>
 </ion-content>

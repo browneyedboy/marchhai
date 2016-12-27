@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Санал болгох</ion-title>
+    <ion-title>{{ pagetitle }}</ion-title>
   </ion-navbar>
 </ion-header>
   
@@ -15,12 +15,13 @@
         </button>
     </div>
     <div class="card-subtitle">
-      <button ion-button icon-left clear>
+      
+      <button ion-button icon-left clear  (click)="addtofav(content.id)">
           <ion-icon name="heart"></ion-icon>
       </button>
-      <button ion-button icon-left clear>
+      <!-- <button ion-button icon-left clear>
           <ion-icon name="download"></ion-icon>
-      </button>
+      </button> -->
     </div>
   </ion-card>
   

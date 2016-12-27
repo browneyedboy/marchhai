@@ -29,16 +29,6 @@ export class RegisterPage {
 	}
 	registerdo(){
 		//index.php/api/signup
-		// {username: <USERNAME>, 
-			// email: <USER EMAIL>, 
-			// phone_number: <USER PHONE>, 
-			// child_birthday: <USER CHILD BIRTHDAY>, 
-			// child_gender: <USER CHILD GENDER>, 
-			// password: <USER PASSWORD>, 
-			// token=<M@RCH@@KH@!@P!>}
-
-		console.log(this.registerform.value.useremail);  	
-		console.log(this.registerform.value.userpassword);
 
 		var loginServiceData = {
 			username: this.registerform.value.username,
@@ -59,13 +49,6 @@ export class RegisterPage {
             console.log('oops');
         });
 
-		// this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData).map(
-		// 	res => res.json()).subscribe(data => {
-	 //        	console.log(data.response);
-	 //    	},
-	 //    	err => {
-	 //        	console.log("Oops!");
-	 //    	});
 	}
 
 }

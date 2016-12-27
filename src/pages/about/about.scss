@@ -1,7 +1,9 @@
 page-about {
 	.item-ios ion-thumbnail img,.item-md ion-thumbnail img {
 	    max-width: 9.6rem;
-	    max-height: 6.6rem;
+	    /* max-height: 6.6rem; */
+	    width: 9.6rem;
+	    /* height: 6.6rem; */
 	}
 	h2{
 		color: #387ef5;
@@ -12,5 +14,9 @@ page-about {
 	.item-md:nth-child(even) {
 	    background: rgba(56, 126, 245, 0.06);
 	}
-
+	.play{
+	    position: absolute;
+        top: 15px;
+    	left: 35px;
+	}
 }
