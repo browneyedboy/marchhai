@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { PlayerPage } from '../player/player';
+import { HelpPage } from '../help/help';
+
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {global} from "../../app/global";
@@ -17,9 +19,11 @@ import {global} from "../../app/global";
 })
 export class ListPage {
     contents: any;
+    democontents: any;
     pagetitle: any;
     userdata: any;
-    constructor(public navCtrl: NavController, public params: NavParams , public http: Http) {
+    show: boolean;
+    constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController) {
 
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
         ///index.php/api/contents?cat=<CATEGORY ID>&token=M@RCH@@KH@!@P!
@@ -31,6 +35,18 @@ export class ListPage {
         err => {
             console.log("Oops!");
         });
+
+        this.show = false;
+        if (this.userdata.is_paid == 0) {
+            this.http.get('http://www.marchaahai.mn/index.php/api/contents?cat='+this.params.get('id')+'&is_paid=1&limit=40&token=M@RCH@@KH@!@P!').map(
+            res => res.json()).subscribe(data => {
+                this.democontents = data.response;
+            },
+            err => {
+                console.log("Oops!");
+            });
+            this.show = true;
+        }
 
         this.pagetitle = this.params.get('title');
     }
@@ -61,6 +77,18 @@ export class ListPage {
         this.http.post('http://www.marchaahai.mn/index.php/api/addfav', loginServiceData)
         .subscribe(data => {
             console.log('added to fav');
+            let toast = this.toastCtrl.create({
+                message: 'Миний дуртайд нэмэгдлээ',
+                duration: 3000,
+                position: 'top',
+                cssClass: 'toast-message'
+            });
+
+            toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+            });
+
+            toast.present();
         },
         err => {
             console.log("Oops!");
@@ -83,6 +111,10 @@ export class ListPage {
         // err => {
         //     console.log("Oops!");
         // });
+    }
+
+    gotohelp(){
+        this.navCtrl.push(HelpPage);
     }
 
 

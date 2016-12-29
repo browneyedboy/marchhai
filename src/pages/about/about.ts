@@ -27,13 +27,21 @@ export class AboutPage {
             console.log("Oops!");
         });
         
-
   }
   playVideo(id, video){
   	this.navCtrl.push(PlayerPage, {
           id: id,
           video: video
      });
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 
 }

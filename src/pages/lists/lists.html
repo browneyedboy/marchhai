@@ -6,24 +6,42 @@
   
 <ion-content class="card-background-page listpage">
 
-  <ion-card *ngFor="let content of contents">
-    <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
-    <div class="card-title">{{content.title}}</div>
-    <div class="play">    
-        <button ion-button icon-only clear large (click)="playVideo(content.id ,content.video)">
-            <ion-icon name="play"></ion-icon>
-        </button>
+    <ion-card *ngFor="let content of contents">
+        <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
+        <div class="card-title">{{content.title}}</div>
+        <div class="play">    
+            <button ion-button icon-only clear large (click)="playVideo(content.id ,content.video)">
+                <ion-icon name="play"></ion-icon>
+            </button>
+        </div>
+        <div class="card-subtitle">
+          
+          <button *ngIf="!show" ion-button small icon-left clear  (click)="addtofav(content.id)">
+              <ion-icon name="heart"></ion-icon>
+          </button>
+          <div *ngIf="show">
+              Төлбөргүй
+          </div>
+          <!-- <button ion-button icon-left clear>
+              <ion-icon name="download"></ion-icon>
+          </button> -->
+        </div>
+    </ion-card>
+
+    <div *ngIf="show">
+    <ion-card  *ngFor="let content of democontents">
+        <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
+        <div class="card-title">{{content.title}}</div>
+        <div class="play">    
+            <button ion-button icon-only clear large (click)="gotohelp()">
+                <ion-icon name="play"></ion-icon>
+            </button>
+        </div>
+        <div class="card-subtitle red">
+            Төлбөртэй
+        </div>
+    </ion-card>
     </div>
-    <div class="card-subtitle">
-      
-      <button ion-button icon-left clear  (click)="addtofav(content.id)">
-          <ion-icon name="heart"></ion-icon>
-      </button>
-      <!-- <button ion-button icon-left clear>
-          <ion-icon name="download"></ion-icon>
-      </button> -->
-    </div>
-  </ion-card>
   
 
 </ion-content>

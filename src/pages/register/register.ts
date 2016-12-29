@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App, ViewController } from 'ionic-angular';
 import {Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { Http } from '@angular/http';
@@ -13,7 +13,7 @@ import {global} from "../../app/global";
 })
 export class RegisterPage {
 	registerform: FormGroup;
-	constructor(public navCtrl: NavController, public http: Http) {
+	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App) {
 		this.registerform = new FormGroup({
 			username: new FormControl('', Validators.required),
 	  		useremail: new FormControl('', Validators.required),
@@ -44,7 +44,9 @@ export class RegisterPage {
         .subscribe(data => {
         	var body = JSON.parse(data['_body'])
 	  		global.userdetail(body.response);
-        	this.navCtrl.push(TabsPage);
+        	// this.navCtrl.push(TabsPage);
+        	this.viewCtrl.dismiss();
+      		this.appCtrl.getRootNav().push(TabsPage);
         }, error => {
             console.log('oops');
         });

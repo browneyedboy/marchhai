@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, App, ViewController } from 'ionic-angular';
+import { NavController, App, ViewController, ToastController  } from 'ionic-angular';
 import {Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
@@ -16,7 +16,7 @@ import {global} from "../../app/global";
 })
 export class LoginPage {
 	todo: FormGroup;
-  	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App) {
+  	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App, private toastCtrl: ToastController) {
   	this.todo = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -58,7 +58,19 @@ export class LoginPage {
       		this.appCtrl.getRootNav().push(TabsPage);
 		},
 		err => {
-		  console.log("Oops!");
+		  	console.log("Oops!");
+		  	let toast = this.toastCtrl.create({
+                message: 'Таны нууц үг эсвэл имэйл буруу байна!',
+                duration: 3000,
+                position: 'top',
+                cssClass: 'toast-message'
+            });
+
+            toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+            });
+
+            toast.present();
 		});
   }
 }
