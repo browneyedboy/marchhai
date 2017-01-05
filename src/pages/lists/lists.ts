@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
-import { NavController, NavParams, ToastController } from 'ionic-angular';
-
+import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
+import {SQLite} from "ionic-native";
 import { PlayerPage } from '../player/player';
 import { HelpPage } from '../help/help';
 
@@ -23,7 +22,11 @@ export class ListPage {
     pagetitle: any;
     userdata: any;
     show: boolean;
-    constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController) {
+
+    public database: SQLite;
+
+
+    constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform) {
 
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
         ///index.php/api/contents?cat=<CATEGORY ID>&token=M@RCH@@KH@!@P!
@@ -49,6 +52,16 @@ export class ListPage {
         }
 
         this.pagetitle = this.params.get('title');
+
+
+        this.platform.ready().then(() => {
+            this.database = new SQLite();
+            this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
+                // this.refresh();
+            }, (error) => {
+                console.log("ERROR: ", error);
+            });
+        });
     }
     playVideo(id, video){
     // http://www.marchaahai.mn/images/content/<CONTENT['id']>/<CONTENT['video']>
@@ -94,7 +107,39 @@ export class ListPage {
             console.log("Oops!");
         });
     }
+    public addtodownload(title, picture, video) {
+        // this.storage.query("INSERT INTO videos (title, picture, video) VALUES (?, ?, ?)", [title, picture, video]).then((data) => {
+        //     // this.downList.push({
+        //     //     "title": title,
+        //     //     "picture": picture,
+        //     //     "video": video,
+        //     // });
+        //     console.log("saved to download list");
+        // }, (error) => {
+        //     console.log(error);
+        // });
+        
+        // this.database.executeSql("INSERT INTO people (firstname, lastname) VALUES ('Nic', 'Raboy')", []).then((data) => {
 
+        this.database.executeSql("INSERT INTO videos (title, picture, video) VALUES (?, ?, ?)", [title, picture, video]).then((data) => {
+            console.log("INSERTED: " + JSON.stringify(data));
+            let toast = this.toastCtrl.create({
+                message: 'Миний татсанд нэмэгдлээ',
+                duration: 3000,
+                position: 'top',
+                cssClass: 'toast-message'
+            });
+
+            toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+            });
+
+            toast.present();
+
+        }, (error) => {
+            console.log("ERROR: " + JSON.stringify(error.err));
+        });
+    }
     removefromfav(contentid){
         //<np>/index.php/api/removefav
         //{user_id: <USER ID>, content_id: <CONTENT ID>, token=<M@RCH@@KH@!@P!>}

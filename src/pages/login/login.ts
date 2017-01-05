@@ -16,10 +16,12 @@ import {global} from "../../app/global";
 })
 export class LoginPage {
 	todo: FormGroup;
+    ischecked: any = 0;
   	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App, private toastCtrl: ToastController) {
   	this.todo = new FormGroup({
       email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      password: new FormControl('', Validators.required),
+      ischecked: new FormControl('')
     });
 
   }
@@ -41,6 +43,8 @@ export class LoginPage {
 	    password: this.todo.value.password,
 	    token: 'M@RCH@@KH@!@P!'
 	};
+
+    console.log(this.todo.value.ischecked);
 
 	this.http.post('http://www.marchaahai.mn/index.php/api/login', loginServiceData)
 	.subscribe(data => {

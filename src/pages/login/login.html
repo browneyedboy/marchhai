@@ -28,12 +28,16 @@
             <ion-label floating>Нууц үг</ion-label>
             <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
-
+        <ion-item>
+        <ion-label>сануулах</ion-label>
+            <ion-checkbox formControlName="ischecked" ></ion-checkbox>
+        </ion-item>
 	</ion-list>
 
 	  	<div padding>
 	    	<button ion-button color="primary" block type="submit" [disabled]="!todo.valid">Нэвтрэх</button>
 	  	</div>
+
 </form>
 	  	<div padding>
 	    	<button ion-button color="primary" (click)="gotoregister()" block>Бүртгүүлэх</button>

@@ -22,9 +22,9 @@
           <div *ngIf="show">
               Төлбөргүй
           </div>
-          <!-- <button ion-button icon-left clear>
+          <button ion-button icon-left clear (click)="addtodownload(content.title, content.picture, content.video)">
               <ion-icon name="download"></ion-icon>
-          </button> -->
+          </button>
         </div>
     </ion-card>
 
