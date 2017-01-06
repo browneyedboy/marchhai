@@ -78,11 +78,11 @@ export class AboutPage {
         // }, (error) => {
         //     console.log(error);
         // });
-        this.database.executeSql("SELECT * FROM videos", []).then((data) => {
+        this.database.executeSql("SELECT * FROM videos2", []).then((data) => {
             this.videos = [];
             if(data.rows.length > 0) {
                 for(var i = 0; i < data.rows.length; i++) {
-                    this.videos.push({title: data.rows.item(i).title, picture: data.rows.item(i).picture, video: data.rows.item(i).video});
+                    this.videos.push({video_id: data.rows.item(i).video_id, title: data.rows.item(i).title, picture: data.rows.item(i).picture, video: data.rows.item(i).video});
                 }
             }
             console.log(this.videos);

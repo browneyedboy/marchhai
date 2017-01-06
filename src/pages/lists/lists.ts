@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
-import {SQLite} from "ionic-native";
+import {SQLite, Transfer} from "ionic-native";
 import { PlayerPage } from '../player/player';
 import { HelpPage } from '../help/help';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {global} from "../../app/global";
-
+declare var cordova: any;
 // import { VideoPlayer } from 'ionic-native';
 
 // import { videojs } from 'video.js';
@@ -24,7 +24,7 @@ export class ListPage {
     show: boolean;
 
     public database: SQLite;
-
+    // public fileTransfer: Transfer;
 
     constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform) {
 
@@ -106,39 +106,51 @@ export class ListPage {
         err => {
             console.log("Oops!");
         });
+
     }
-    public addtodownload(title, picture, video) {
-        // this.storage.query("INSERT INTO videos (title, picture, video) VALUES (?, ?, ?)", [title, picture, video]).then((data) => {
-        //     // this.downList.push({
-        //     //     "title": title,
-        //     //     "picture": picture,
-        //     //     "video": video,
-        //     // });
-        //     console.log("saved to download list");
+    public addtodownload(id, title, picture, video) {
+
+        // this.database.executeSql("INSERT INTO videos2 (video_id, title, picture, video) VALUES (?, ?, ?, ?)", [id, title, picture, video]).then((data) => {
+        //     console.log("INSERTED: " + JSON.stringify(data));
+            
+
+        //     // toast
+        //     let toast = this.toastCtrl.create({
+        //         message: 'Миний татсанд нэмэгдлээ',
+        //         duration: 3000,
+        //         position: 'top',
+        //         cssClass: 'toast-message'
+        //     });
+
+        //     toast.onDidDismiss(() => {
+        //         console.log('Dismissed toast');
+        //     });
+
+        //     toast.present();
+
         // }, (error) => {
-        //     console.log(error);
+        //     console.log("ERROR: " + JSON.stringify(error.err));
         // });
-        
-        // this.database.executeSql("INSERT INTO people (firstname, lastname) VALUES ('Nic', 'Raboy')", []).then((data) => {
 
-        this.database.executeSql("INSERT INTO videos (title, picture, video) VALUES (?, ?, ?)", [title, picture, video]).then((data) => {
-            console.log("INSERTED: " + JSON.stringify(data));
-            let toast = this.toastCtrl.create({
-                message: 'Миний татсанд нэмэгдлээ',
-                duration: 3000,
-                position: 'top',
-                cssClass: 'toast-message'
+        // fileTransfer.abort(); // canceling 
+        console.log('top from download');
+        const fileTransfer = new Transfer();
+          let url = 'http://www.marchaahai.mn/images/content/'+id+'/'+video;
+
+          fileTransfer.download(url, cordova.file.dataDirectory + video).then((entry) => {
+            console.log('download complete: ' + entry.toURL());
+          }, (error) => {
+            // handle error
+            console.log('video tatalt aldaa!');
             });
 
-            toast.onDidDismiss(() => {
-                console.log('Dismissed toast');
-            });
+          fileTransfer.onProgress(function(){
+            console.log('onProgress...');
+          });
 
-            toast.present();
+          console.log(url);
+          console.log(cordova.file.dataDirectory);
 
-        }, (error) => {
-            console.log("ERROR: " + JSON.stringify(error.err));
-        });
     }
     removefromfav(contentid){
         //<np>/index.php/api/removefav

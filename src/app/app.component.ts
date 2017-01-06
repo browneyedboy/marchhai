@@ -28,7 +28,8 @@ export class MyApp {
                 name: "data.db",
                 location: "default"
             }).then(() => {
-                db.executeSql("CREATE TABLE IF NOT EXISTS videos (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, picture TEXT, video TEXT)", {}).then((data) => {
+                // CREATE TABLE IF NOT EXISTS videos 
+                db.executeSql("CREATE TABLE IF NOT EXISTS videos2 (id INTEGER PRIMARY KEY AUTOINCREMENT, video_id INTEGER, title TEXT, picture TEXT, video TEXT)", {}).then((data) => {
                     console.log("TABLE CREATED: ", data);
                 }, (error) => {
                     console.error("Unable to execute sql", error);
