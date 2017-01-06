@@ -33,7 +33,13 @@ export class MyApp {
                     console.log("TABLE CREATED: ", data);
                 }, (error) => {
                     console.error("Unable to execute sql", error);
-                })
+                });
+
+                db.executeSql("CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER, useremail TEXT, password TEXT)", {}).then((data) => {
+                    console.log("TABLE CREATED: ", data);
+                }, (error) => {
+                    console.error("Unable to execute sql", error);
+                });
             }, (error) => {
                 console.error("Unable to open database", error);
             });

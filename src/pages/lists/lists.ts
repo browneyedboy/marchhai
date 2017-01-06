@@ -110,27 +110,27 @@ export class ListPage {
     }
     public addtodownload(id, title, picture, video) {
 
-        // this.database.executeSql("INSERT INTO videos2 (video_id, title, picture, video) VALUES (?, ?, ?, ?)", [id, title, picture, video]).then((data) => {
-        //     console.log("INSERTED: " + JSON.stringify(data));
+        this.database.executeSql("INSERT INTO videos2 (video_id, title, picture, video) VALUES (?, ?, ?, ?)", [id, title, picture, video]).then((data) => {
+            console.log("INSERTED: " + JSON.stringify(data));
             
 
-        //     // toast
-        //     let toast = this.toastCtrl.create({
-        //         message: 'Миний татсанд нэмэгдлээ',
-        //         duration: 3000,
-        //         position: 'top',
-        //         cssClass: 'toast-message'
-        //     });
+            // toast
+            let toast = this.toastCtrl.create({
+                message: 'Миний татсанд нэмэгдлээ',
+                duration: 3000,
+                position: 'top',
+                cssClass: 'toast-message'
+            });
 
-        //     toast.onDidDismiss(() => {
-        //         console.log('Dismissed toast');
-        //     });
+            toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+            });
 
-        //     toast.present();
+            toast.present();
 
-        // }, (error) => {
-        //     console.log("ERROR: " + JSON.stringify(error.err));
-        // });
+        }, (error) => {
+            console.log("ERROR: " + JSON.stringify(error.err));
+        });
 
         // fileTransfer.abort(); // canceling 
         console.log('top from download');

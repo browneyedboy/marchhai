@@ -3,9 +3,9 @@
       <ion-segment-button value="saved">
         Хадгалсан
       </ion-segment-button>
-      <!-- <ion-segment-button value="download">
+      <ion-segment-button value="download">
         Татаж авсан
-      </ion-segment-button> -->
+      </ion-segment-button>
     </ion-segment>
 </ion-header>
 
@@ -36,31 +36,15 @@
     </ion-list>
 
 
-    <!-- <ion-list *ngSwitchCase="'download'" no-lines>
-      <ion-item>
+    <ion-list *ngSwitchCase="'download'" no-lines>
+
+      <ion-item *ngFor="let download of downloads">
         <ion-thumbnail item-left>
           <img src="assets/img/friends.jpg">
         </ion-thumbnail>
         <h2>Үнэнч найзууд 222</h2>
       </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Цэцэрлэгтээ хамт явнадаа</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Онсого 3</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
-        </ion-thumbnail>
-        <h2>Шинэ жилийн баяр</h2>
-      </ion-item>
-    </ion-list> -->
+      
+    </ion-list>
   </div>
 </ion-content>

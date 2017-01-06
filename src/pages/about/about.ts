@@ -19,6 +19,7 @@ export class AboutPage {
 
     public database: SQLite;
     public videos: Array<Object>;
+    public downloads: any;
 
     constructor(public navCtrl: NavController, public http: Http, private platform: Platform) {
   		//<np>/index.php/api/favorites/<USER ID>?limit=<10, 20 etc>&token=M@RCH@@KH@!@P!
@@ -86,6 +87,7 @@ export class AboutPage {
                 }
             }
             console.log(this.videos);
+            this.downloads = this.videos;
         }, (error) => {
             console.log("ERROR: " + JSON.stringify(error));
         });
