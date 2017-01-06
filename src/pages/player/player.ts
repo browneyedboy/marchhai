@@ -27,6 +27,11 @@ export class PlayerPage {
   	// onPageDidEnter()
    //  {
    //      this.tabBarElement.style.display = 'none';
+            // import { ScreenOrientation } from 'ionic-native';
+            // // set to either landscape
+            // ScreenOrientation.lockOrientation('landscape');
+            // // allow user rotate
+            // ScreenOrientation.unlockOrientation();
    //  }
 
    //  onPageWillLeave()
