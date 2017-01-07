@@ -40,7 +40,6 @@ export class LoginPage {
                         this.password = data.rows.item(i).password;
                     }
                     this.todo.valid = true;
-                    console.log(this.todo.valid);
                 }
                 
             }, (error) => {
@@ -54,17 +53,11 @@ export class LoginPage {
         
 
     });
-    console.log("later platform");
-    console.log(this.todo.valid);
 
   }
 
   ionViewDidLoad() {
-    console.log('ion did load');
-    if (this.todo.value.ischecked) {
-        console.log('is checked');
-        
-    }
+    
   }
 
   gotoregister(){
@@ -103,13 +96,13 @@ export class LoginPage {
                 }
                 
             }
-            // else{
-            //     this.database.executeSql("DELETE FROM profile", []).then((data) => {
-            //         console.log("DELETEd USER: " + JSON.stringify(data));
-            //     }, (error) => {
-            //         console.log("ERROR USER: " + JSON.stringify(error.err));
-            //     });
-            // }
+            else{
+                this.database.executeSql("DELETE FROM profile", []).then((data) => {
+                    console.log("DELETEd USER: " + JSON.stringify(data));
+                }, (error) => {
+                    console.log("ERROR USER: " + JSON.stringify(error.err));
+                });
+            }
             
 
 			//this.navCtrl.push(TabsPage);
