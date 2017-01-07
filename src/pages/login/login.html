@@ -21,12 +21,12 @@
         </ion-item>
         <ion-item>
             <ion-label floating>Имэйл хаяг</ion-label>
-            <ion-input type="text" formControlName="email"></ion-input>
+            <ion-input type="text" formControlName="email" [value]="mail" [(ngModel)]="mail"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Нууц үг</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
+            <ion-input type="password" formControlName="password" [value]="password" [(ngModel)]="password"></ion-input>
         </ion-item>
         <ion-item>
         <ion-label>сануулах</ion-label>

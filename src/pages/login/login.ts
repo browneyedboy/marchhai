@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, App, ViewController, ToastController  } from 'ionic-angular';
+import { NavController, App, ViewController, ToastController, Platform  } from 'ionic-angular';
 import {Validators, FormGroup, FormControl } from '@angular/forms';
 import {SQLite} from "ionic-native";
 import { RegisterPage } from '../register/register';
@@ -17,27 +17,54 @@ import {global} from "../../app/global";
 export class LoginPage {
 	todo: FormGroup;
     public database: SQLite;
-    ischecked: any = 0;
-  	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App, private toastCtrl: ToastController) {
+    haveuserindata :any;
+    mail: any;
+    password: any;
+    // ischecked: any = 0;
+  	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App, private toastCtrl: ToastController, private platform: Platform) {
   	this.todo = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
       ischecked: new FormControl('')
     });
-
+    console.log(this.todo.valid);
     this.platform.ready().then(() => {
         this.database = new SQLite();
         this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
             // this.refresh();
+            this.database.executeSql("SELECT * FROM profile LIMIT 1", []).then((data) => {
+                if(data.rows.length > 0) {
+                    for(var i = 0; i < data.rows.length; i++) {
+                        this.haveuserindata = data.rows.item(i).userid;
+                        this.mail = data.rows.item(i).useremail;
+                        this.password = data.rows.item(i).password;
+                    }
+                    this.todo.valid = true;
+                    console.log(this.todo.valid);
+                }
+                
+            }, (error) => {
+                console.log("ERROR: " + error);
+            });
+
         }, (error) => {
             console.log("ERROR: ", error);
         });
+
+        
+
     });
+    console.log("later platform");
+    console.log(this.todo.valid);
 
   }
 
   ionViewDidLoad() {
-    
+    console.log('ion did load');
+    if (this.todo.value.ischecked) {
+        console.log('is checked');
+        
+    }
   }
 
   gotoregister(){
@@ -64,26 +91,25 @@ export class LoginPage {
 			// console.log(data['_body']);
 			var body = JSON.parse(data['_body'])
 			global.userdetail(body.response);
-            var haveuserindata = 0;
+            
             if(this.todo.value.ischecked){
-                this.database.executeSql("SELECT * FROM profile where userid = ? limit 1", [body.response.id]).then((data) => {
-                    if(data.rows.length > 0) {
-                        for(var i = 0; i < data.rows.length; i++) {
-                            haveuserindata = data.rows.item(i).userid;
-                        }
-                    }
-                    console.log(this.videos);
-                    this.downloads = this.videos;
-                }, (error) => {
-                    console.log("ERROR: " + JSON.stringify(error));
-                });
-                if (true) {}
-                this.database.executeSql("INSERT INTO profile (userid, useremail, password) VALUES (?, ?, ?)", [body.response.id, this.todo.value.email, this.todo.value.password]).then((data) => {
-                    console.log("INSERTED USER: " + JSON.stringify(data));
-                }, (error) => {
-                    console.log("ERROR USER: " + JSON.stringify(error.err));
-                });
+                
+                if (!this.haveuserindata) {
+                    this.database.executeSql("INSERT INTO profile (userid, useremail, password) VALUES (?, ?, ?)", [body.response.id, this.todo.value.email, this.todo.value.password]).then((data) => {
+                        console.log("INSERTED USER: " + data);
+                    }, (error) => {
+                        console.log("ERROR USER: " + error.err);
+                    });
+                }
+                
             }
+            // else{
+            //     this.database.executeSql("DELETE FROM profile", []).then((data) => {
+            //         console.log("DELETEd USER: " + JSON.stringify(data));
+            //     }, (error) => {
+            //         console.log("ERROR USER: " + JSON.stringify(error.err));
+            //     });
+            // }
             
 
 			//this.navCtrl.push(TabsPage);
