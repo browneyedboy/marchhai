@@ -22,6 +22,7 @@ export class ListPage {
     pagetitle: any;
     userdata: any;
     show: boolean;
+    isbusy: any;
 
     public database: SQLite;
     // public fileTransfer: Transfer;
@@ -38,7 +39,7 @@ export class ListPage {
         err => {
             console.log("Oops!");
         });
-
+        this.isbusy = 0;
         this.show = false;
         if (this.userdata.is_paid == 0) {
             this.http.get('http://www.marchaahai.mn/index.php/api/contents?cat='+this.params.get('id')+'&is_paid=1&limit=40&token=M@RCH@@KH@!@P!').map(
@@ -110,47 +111,45 @@ export class ListPage {
     }
     public addtodownload(id, title, picture, video) {
 
-        this.database.executeSql("INSERT INTO videos2 (video_id, title, picture, video) VALUES (?, ?, ?, ?)", [id, title, picture, video]).then((data) => {
-            console.log("INSERTED: " + JSON.stringify(data));
-            
-
-            // toast
-            let toast = this.toastCtrl.create({
-                message: 'Миний татсанд нэмэгдлээ',
-                duration: 3000,
-                position: 'top',
-                cssClass: 'toast-message'
-            });
-
-            toast.onDidDismiss(() => {
-                console.log('Dismissed toast');
-            });
-
-            toast.present();
-
-        }, (error) => {
-            console.log("ERROR: " + JSON.stringify(error.err));
-        });
-
+        
         // fileTransfer.abort(); // canceling 
         console.log('top from download');
         const fileTransfer = new Transfer();
           let url = 'http://www.marchaahai.mn/images/content/'+id+'/'+video;
-
+          this.isbusy = id;
           fileTransfer.download(url, cordova.file.dataDirectory + video).then((entry) => {
-            console.log('download complete: ' + entry.toURL());
+            //download complete: file:///Users/macuser/Library/Developer/CoreSimulator/Devices/F7A40B12-B70D-4502-AB05-002A37ACF1D8/data/Containers/Data/Application/E24F449F-AE49-4E8B-AEF9-C721598C3E72/Library/NoCloud/20161209182125-Gurvan_baavgai.mp4
+            // console.log('download complete: ' + entry.toURL());
+            this.database.executeSql("INSERT INTO videos2 (video_id, title, picture, video) VALUES (?, ?, ?, ?)", [id, title, picture, video]).then((data) => {
+                console.log("INSERTED: " + JSON.stringify(data));
+                // toast
+                let toast = this.toastCtrl.create({
+                    message: 'Миний татсанд нэмэгдлээ',
+                    duration: 3000,
+                    position: 'top',
+                    cssClass: 'toast-message'
+                });
+
+                toast.onDidDismiss(() => {
+                    console.log('Dismissed toast');
+                });
+
+                toast.present();
+
+            }, (error) => {
+                console.log("ERROR: " + JSON.stringify(error.err));
+            });
+            this.isbusy = 0;
           }, (error) => {
             // handle error
             console.log('video tatalt aldaa!');
             });
 
-          fileTransfer.onProgress(function(){
-            console.log('onProgress...');
-          });
+          // fileTransfer.onProgress(function(){
+          //   this.isbusy = true;
+          // });
 
-          console.log(url);
-          console.log(cordova.file.dataDirectory);
-
+          
     }
     removefromfav(contentid){
         //<np>/index.php/api/removefav

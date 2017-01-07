@@ -20,7 +20,8 @@ export class LoginPage {
     haveuserindata :any;
     mail: any;
     password: any;
-    // ischecked: any = 0;
+    ischecked: any;
+
   	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App, private toastCtrl: ToastController, private platform: Platform) {
   	this.todo = new FormGroup({
       email: new FormControl('', Validators.required),
@@ -38,6 +39,7 @@ export class LoginPage {
                         this.haveuserindata = data.rows.item(i).userid;
                         this.mail = data.rows.item(i).useremail;
                         this.password = data.rows.item(i).password;
+                        this.ischecked = true;
                     }
                     this.todo.valid = true;
                 }

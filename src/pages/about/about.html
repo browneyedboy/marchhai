@@ -40,9 +40,14 @@
 
       <ion-item *ngFor="let download of downloads">
         <ion-thumbnail item-left>
-          <img src="assets/img/friends.jpg">
+          <img [src]="'http://www.marchaahai.mn/images/content/'+download.id+'/'+download.picture">
         </ion-thumbnail>
-        <h2>Үнэнч найзууд 222</h2>
+        <div class="play">    
+            <button ion-button icon-only clear large (click)="playVideolocal(download.video)">
+                <ion-icon name="play"></ion-icon>
+            </button>
+        </div>
+        <h2>{{download.title}}</h2>
       </ion-item>
       
     </ion-list>

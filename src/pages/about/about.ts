@@ -50,7 +50,13 @@ export class AboutPage {
     	this.navCtrl.push(PlayerPage, {
           id: id,
           video: video
-     });
+        });
+    }
+    playVideolocal(video){
+        this.navCtrl.push(PlayerPage, {
+          id: 0,
+          video: video
+        });
     }
 
     doRefresh(refresher) {
@@ -63,22 +69,7 @@ export class AboutPage {
     }
 
     public refresh() {
-        // this.storage.query("SELECT * FROM videos").then((data) => {
-        //     if(data.res.rows.length > 0) {
-        //         this.downList = [];
-        //         for(let i = 0; i < data.res.rows.length; i++) {
-        //             this.downList.push({
-        //                 "id": data.res.rows.item(i).id,
-        //                 "title": data.res.rows.item(i).title,
-        //                 "picture": data.res.rows.item(i).picture,
-        //                 "video": data.res.rows.item(i).video
-        //             });
-        //         }
-        //         console.log(this.downList);
-        //     }
-        // }, (error) => {
-        //     console.log(error);
-        // });
+       
         this.database.executeSql("SELECT * FROM videos2", []).then((data) => {
             this.videos = [];
             if(data.rows.length > 0) {
