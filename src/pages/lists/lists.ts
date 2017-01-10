@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
-import {SQLite, Transfer} from "ionic-native";
+import {SQLite, Transfer, Network} from "ionic-native";
 import { PlayerPage } from '../player/player';
 import { HelpPage } from '../help/help';
 
@@ -29,6 +29,10 @@ export class ListPage {
 
     constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform) {
 
+        let disconnectSubscription = Network.onDisconnect().subscribe(() => {
+          console.log('network was disconnected :-(');
+        });
+        
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
         ///index.php/api/contents?cat=<CATEGORY ID>&token=M@RCH@@KH@!@P!
         this.userdata = global.userdetailget();
@@ -117,8 +121,7 @@ export class ListPage {
         const fileTransfer = new Transfer();
           let url = 'http://www.marchaahai.mn/images/content/'+id+'/'+video;
           this.isbusy = id;
-          fileTransfer.download(url, cordova.file.dataDirectory + video).then((entry) => {
-            //download complete: file:///Users/macuser/Library/Developer/CoreSimulator/Devices/F7A40B12-B70D-4502-AB05-002A37ACF1D8/data/Containers/Data/Application/E24F449F-AE49-4E8B-AEF9-C721598C3E72/Library/NoCloud/20161209182125-Gurvan_baavgai.mp4
+          fileTransfer.download(url, cordova.file.dataDirectory + video, true).then((entry) => {
             // console.log('download complete: ' + entry.toURL());
             this.database.executeSql("INSERT INTO videos2 (video_id, title, picture, video) VALUES (?, ?, ?, ?)", [id, title, picture, video]).then((data) => {
                 console.log("INSERTED: " + JSON.stringify(data));
@@ -136,10 +139,10 @@ export class ListPage {
 
                 toast.present();
 
-            }, (error) => {
-                console.log("ERROR: " + JSON.stringify(error.err));
-            });
-            this.isbusy = 0;
+                }, (error) => {
+                    console.log("ERROR: " + JSON.stringify(error.err));
+                });
+                this.isbusy = 0;
           }, (error) => {
             // handle error
             console.log('video tatalt aldaa!');
@@ -151,23 +154,7 @@ export class ListPage {
 
           
     }
-    removefromfav(contentid){
-        //<np>/index.php/api/removefav
-        //{user_id: <USER ID>, content_id: <CONTENT ID>, token=<M@RCH@@KH@!@P!>}
-        // var loginServiceData = {
-        //     user_id: this.userdata.id,
-        //     content_id: contentid,
-        //     token: 'M@RCH@@KH@!@P!'
-        // };
-
-        // this.http.post('http://www.marchaahai.mn/index.php/api/removefav', loginServiceData)
-        // .subscribe(data => {
-        //     console.log('removed from fav');
-        // },
-        // err => {
-        //     console.log("Oops!");
-        // });
-    }
+    
 
     gotohelp(){
         this.navCtrl.push(HelpPage);

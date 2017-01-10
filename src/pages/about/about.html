@@ -32,6 +32,7 @@
                 </button>
             </div>
             <h2>{{content.title}}</h2>
+            <ion-icon name="trash" item-right (click)="removefromfav(content.id)"></ion-icon>
         </ion-item>
     </ion-list>
 
@@ -40,7 +41,7 @@
 
       <ion-item *ngFor="let download of downloads">
         <ion-thumbnail item-left>
-          <img [src]="'http://www.marchaahai.mn/images/content/'+download.id+'/'+download.picture">
+          <img [src]="'http://www.marchaahai.mn/images/content/'+download.video_id+'/'+download.picture">
         </ion-thumbnail>
         <div class="play">    
             <button ion-button icon-only clear large (click)="playVideolocal(download.video)">
@@ -48,6 +49,7 @@
             </button>
         </div>
         <h2>{{download.title}}</h2>
+        <ion-icon name="trash" item-right (click)="removefromdownload(download.video_id, download.video)" ></ion-icon>
       </ion-item>
       
     </ion-list>
