@@ -22,7 +22,7 @@
           <div *ngIf="show">
               Төлбөргүй
           </div>
-          <button ion-button icon-left clear (click)="addtodownload(content.id, content.title, content.picture, content.video)">
+          <button  *ngIf="!show" ion-button icon-left clear (click)="addtodownload(content.id, content.title, content.picture, content.video)">
               <ion-icon *ngIf="isbusy!=content.id" name="download"></ion-icon>
               <ion-spinner *ngIf="isbusy==content.id" name="bubbles"></ion-spinner>
           </button>

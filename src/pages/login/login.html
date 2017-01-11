@@ -32,6 +32,7 @@
         <ion-label>сануулах</ion-label>
             <ion-checkbox formControlName="ischecked" value="1" [(ngModel)]="ischecked" ></ion-checkbox>
         </ion-item>
+
 	</ion-list>
 
 	  	<div padding>
@@ -42,5 +43,8 @@
 	  	<div padding>
 	    	<button ion-button color="primary" (click)="gotoregister()" block>Бүртгүүлэх</button>
 	  	</div>
+        <div padding>
+            <button ion-button full clear (click)="gotoforgotpass()">нууц үг мартсан</button>
+        </div>
 
 </ion-content>

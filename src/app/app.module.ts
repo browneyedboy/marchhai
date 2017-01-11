@@ -13,6 +13,8 @@ import { ChangepassPage } from "../pages/changepass/changepass";
 import { HelpPage } from "../pages/help/help";
 import { WelcometabPage } from "../pages/welcometab/welcometab";
 import { DemoPage } from "../pages/demo/demo";
+import { ForgotpassPage } from "../pages/forgotpass/forgotpass";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -27,7 +29,8 @@ import { DemoPage } from "../pages/demo/demo";
     ChangepassPage,
     HelpPage,
     WelcometabPage,
-    DemoPage
+    DemoPage,
+    ForgotpassPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -46,7 +49,8 @@ import { DemoPage } from "../pages/demo/demo";
     ChangepassPage,
     HelpPage,
     WelcometabPage,
-    DemoPage
+    DemoPage,
+    ForgotpassPage
   ],
   providers: []
 })

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, AlertController } from 'ionic-angular';
 import {SQLite, File} from "ionic-native";
 declare var cordova: any;
 import { Http } from '@angular/http';
@@ -23,12 +23,12 @@ export class AboutPage {
 
     userdata: any;
 
-    constructor(public navCtrl: NavController, public http: Http, private platform: Platform) {
+    constructor(public navCtrl: NavController, public http: Http, private platform: Platform, public alertCtrl: AlertController) {
   		this.userdata = global.userdetailget();
         this.platform.ready().then(() => {
             this.database = new SQLite();
             this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
-                //this.refresh();
+                this.refresh();
             }, (error) => {
                 console.log("ERROR: ", error);
             });
@@ -87,44 +87,80 @@ export class AboutPage {
 
     }
     removefromdownload(contentid, video){
-        //removeFile(path, fileName)
-        this.database.executeSql("DELETE FROM videos2 WHERE video_id = ?", [contentid]).then((data) => {
-            
-            if(data) {
-                File.removeFile(cordova.file.dataDirectory, video).then(() => { 
-                    console.log("video file has deleted");
-                    this.refresh();
+        let confirm = this.alertCtrl.create({
+          title: 'Устгах!',
+          message: 'Та итгэлтэй байна уу?',
+          buttons: [
+            {
+              text: 'Үгүй',
+              handler: () => {
+                console.log('Disagree clicked');
+              }
+            },
+            {
+              text: 'Тийм',
+              handler: () => {
+                console.log('Agree clicked');
+                this.database.executeSql("DELETE FROM videos2 WHERE video_id = ?", [contentid]).then((data) => {
+                    
+                    if(data) {
+                        File.removeFile(cordova.file.dataDirectory, video).then(() => { 
+                            console.log("video file has deleted");
+                            this.refresh();
+                        }, (error) => {
+                                console.log("error video delete: " + JSON.stringify(error.err));
+                        });
+                        console.log("deleted from database");
+                        console.log(JSON.stringify(data));
+                    }
+
                 }, (error) => {
-                        console.log("error video delete: " + JSON.stringify(error.err));
+                    console.log("error delete from database: " + JSON.stringify(error));
                 });
-                console.log("deleted from database");
-                console.log(JSON.stringify(data));
+              }
             }
-
-        }, (error) => {
-            console.log("error delete from database: " + JSON.stringify(error));
+          ]
         });
-
-
+        confirm.present();
         
     }
     removefromfav(contentid){
         //<np>/index.php/api/removefav
         //{user_id: <USER ID>, content_id: <CONTENT ID>, token=<M@RCH@@KH@!@P!>}
-        var loginServiceData = {
-            user_id: this.userdata.id,
-            content_id: contentid,
-            token: 'M@RCH@@KH@!@P!'
-        };
+        let confirm = this.alertCtrl.create({
+          title: 'Устгах!',
+          message: 'Та итгэлтэй байна уу?',
+          buttons: [
+            {
+              text: 'Үгүй',
+              handler: () => {
+                console.log('Disagree clicked');
+              }
+            },
+            {
+              text: 'Тийм',
+              handler: () => {
+                console.log('Agree clicked');
+                var loginServiceData = {
+                    user_id: this.userdata.id,
+                    content_id: contentid,
+                    token: 'M@RCH@@KH@!@P!'
+                };
 
-        this.http.post('http://www.marchaahai.mn/index.php/api/removefav', loginServiceData)
-        .subscribe(data => {
-            console.log('removed from fav');
-            this.refresh();
-        },
-        err => {
-            console.log("Oops!");
+                this.http.post('http://www.marchaahai.mn/index.php/api/removefav', loginServiceData)
+                .subscribe(data => {
+                    console.log('removed from fav');
+                    this.refresh();
+                },
+                err => {
+                    console.log("Oops!");
+                });
+              }
+            }
+          ]
         });
+        confirm.present();
+        
     }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
-import {SQLite, Transfer, Network} from "ionic-native";
+import {SQLite, Transfer} from "ionic-native";
 import { PlayerPage } from '../player/player';
 import { HelpPage } from '../help/help';
 
@@ -29,10 +29,7 @@ export class ListPage {
 
     constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform) {
 
-        let disconnectSubscription = Network.onDisconnect().subscribe(() => {
-          console.log('network was disconnected :-(');
-        });
-        
+
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
         ///index.php/api/contents?cat=<CATEGORY ID>&token=M@RCH@@KH@!@P!
         this.userdata = global.userdetailget();

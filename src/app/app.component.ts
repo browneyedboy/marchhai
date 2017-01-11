@@ -35,7 +35,7 @@ export class MyApp {
                     console.error("Unable to execute sql", error);
                 });
 
-                db.executeSql("CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER, useremail TEXT, password TEXT)", {}).then((data) => {
+                db.executeSql("CREATE TABLE IF NOT EXISTS profile2 (id INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER, useremail TEXT, password TEXT, is_paid INTEGER)", {}).then((data) => {
                     console.log("TABLE CREATED: ", data);
                 }, (error) => {
                     console.error("Unable to execute sql", error);

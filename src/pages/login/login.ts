@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, App, ViewController, ToastController, Platform  } from 'ionic-angular';
-import {Validators, FormGroup, FormControl } from '@angular/forms';
-import {SQLite} from "ionic-native";
+import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { SQLite } from "ionic-native";
 import { RegisterPage } from '../register/register';
+import { ForgotpassPage } from '../forgotpass/forgotpass';
 import { TabsPage } from '../tabs/tabs';
 
 import { Http } from '@angular/http';
@@ -21,6 +22,7 @@ export class LoginPage {
     mail: any;
     password: any;
     ischecked: any;
+    is_paid: any;
 
   	constructor(public navCtrl: NavController, public http: Http, public viewCtrl: ViewController, public appCtrl: App, private toastCtrl: ToastController, private platform: Platform) {
   	this.todo = new FormGroup({
@@ -33,12 +35,13 @@ export class LoginPage {
         this.database = new SQLite();
         this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
             // this.refresh();
-            this.database.executeSql("SELECT * FROM profile LIMIT 1", []).then((data) => {
+            this.database.executeSql("SELECT * FROM profile2 LIMIT 1", []).then((data) => {
                 if(data.rows.length > 0) {
                     for(var i = 0; i < data.rows.length; i++) {
                         this.haveuserindata = data.rows.item(i).userid;
                         this.mail = data.rows.item(i).useremail;
                         this.password = data.rows.item(i).password;
+                        this.is_paid = data.rows.item(i).is_paid;
                         this.ischecked = true;
                     }
                     this.todo.valid = true;
@@ -65,10 +68,21 @@ export class LoginPage {
   gotoregister(){
   	this.navCtrl.push(RegisterPage);
   }
+  gotoforgotpass(){
+    this.navCtrl.push(ForgotpassPage); 
+  }
 
   dologin(){
   	// index.php/api/login
   	//{email: <USER EMAIL>, password: <USER PASSWORD>, token=<M@RCH@@KH@!@P!>}
+    
+    // watch network for a disconnect
+
+            if (this.is_paid == 1) {
+                this.viewCtrl.dismiss();
+                this.appCtrl.getRootNav().push(TabsPage);
+            }
+
 
 	var loginServiceData = {
 	    email: this.todo.value.email,
@@ -90,7 +104,7 @@ export class LoginPage {
             if(this.todo.value.ischecked){
                 
                 if (!this.haveuserindata) {
-                    this.database.executeSql("INSERT INTO profile (userid, useremail, password) VALUES (?, ?, ?)", [body.response.id, this.todo.value.email, this.todo.value.password]).then((data) => {
+                    this.database.executeSql("INSERT INTO profile2 (userid, useremail, password, is_paid) VALUES (?, ?, ?, ?)", [body.response.id, this.todo.value.email, this.todo.value.password, body.response.is_paid]).then((data) => {
                         console.log("INSERTED USER: " + data);
                     }, (error) => {
                         console.log("ERROR USER: " + error.err);
@@ -99,7 +113,7 @@ export class LoginPage {
                 
             }
             else{
-                this.database.executeSql("DELETE FROM profile", []).then((data) => {
+                this.database.executeSql("DELETE FROM profile2", []).then((data) => {
                     console.log("DELETEd USER: " + JSON.stringify(data));
                 }, (error) => {
                     console.log("ERROR USER: " + JSON.stringify(error.err));

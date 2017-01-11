@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
+import { ScreenOrientation } from 'ionic-native';
 declare var cordova: any;
 
 @Component({
@@ -19,29 +20,31 @@ export class PlayerPage {
   		//platform.isPortrait() or platform.isLandscape()
   		console.log('player page');
 	    // this.tabBarElement = document.querySelector('#tabs ion-tabbar-section');
-	    if (platform.isLandscape()) {
-		    // this.tabBarElement.style.display = 'none';
-		    console.log('isLandscape');
-	    }
-	    if (platform.isPortrait()) {
-		    // this.tabBarElement.style.display = 'block';
-		    console.log('isPortrait');
-	    }
+	    // if (platform.isLandscape()) {
+		   //  // this.tabBarElement.style.display = 'none';
+		   //  console.log('isLandscape');
+	    // }
+	    // if (platform.isPortrait()) {
+		   //  // this.tabBarElement.style.display = 'block';
+		   //  console.log('isPortrait');
+	    // }
 
   	}
-  	// onPageDidEnter()
-   //  {
+  	ionViewDidLoad()
+    {
+        ScreenOrientation.lockOrientation('landscape');
    //      this.tabBarElement.style.display = 'none';
             // import { ScreenOrientation } from 'ionic-native';
             // // set to either landscape
             // ScreenOrientation.lockOrientation('landscape');
             // // allow user rotate
             // ScreenOrientation.unlockOrientation();
-   //  }
+    }
 
-   //  onPageWillLeave()
-   //  {
-   //      this.tabBarElement.style.display = 'block';
-   //  }
+    ionViewWillLeave()
+    {
+        // this.tabBarElement.style.display = 'block';
+        ScreenOrientation.unlockOrientation();
+    }
 
 }
