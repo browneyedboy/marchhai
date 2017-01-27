@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform, ModalController } from 'ionic-angular';
 import {SQLite, Transfer} from "ionic-native";
 import { PlayerPage } from '../player/player';
 import { HelpPage } from '../help/help';
@@ -27,7 +27,7 @@ export class ListPage {
     public database: SQLite;
     // public fileTransfer: Transfer;
 
-    constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform) {
+    constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform, public modalCtrl: ModalController) {
 
 
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
@@ -71,10 +71,19 @@ export class ListPage {
           id: id,
           video: video
       });
+    // let modal = this.modalCtrl.create(PlayerPage, {
+    //     id: id,
+    //     video: video
+    // });
+    // modal.present();
   	// Playing a video.
-    //http://marchaahai.mn/images/content/247/20161209182125-Gurvan_baavgai.mp4
-        // VideoPlayer.play("http://marchaahai.mn/images/content/247/20161209182125-Gurvan_baavgai.mp4").then(() => {
+    // http://marchaahai.mn/images/content/247/20161209182125-Gurvan_baavgai.mp4
+    
+        // VideoPlayer.play("http://marchaahai.mn/images/content/"+id+"/"+video+"").then(() => {
         //  console.log('video completed');
+        //  ScreenOrientation.lockOrientation('landscape');
+        //  ScreenOrientation.unlockOrientation();
+
         // }).catch(err => {
         //  console.log(err);
         // });

@@ -44,12 +44,24 @@ export class AboutPage {
           id: id,
           video: video
         });
+     // http://www.marchaahai.mn/images/content/
+    //     VideoPlayer.play("http://marchaahai.mn/images/content/"+id+"/"+video+"").then(() => {
+    //      console.log('video completed');
+    //     }).catch(err => {
+    //      console.log(err);
+    //     });
     }
     playVideolocal(video){
         this.navCtrl.push(PlayerPage, {
           id: 0,
           video: video
         });
+
+        // VideoPlayer.play(cordova.file.dataDirectory + video).then(() => {
+        //  console.log('video completed');
+        // }).catch(err => {
+        //  console.log(err);
+        // });
     }
 
     doRefresh(refresher) {

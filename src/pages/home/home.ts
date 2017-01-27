@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
-import { Network } from 'ionic-native';
+import { Network, ScreenOrientation } from 'ionic-native';
 import {ListPage} from '../lists/lists';
 
 import { Http } from '@angular/http';
@@ -36,7 +36,9 @@ export class HomePage {
 	        console.log("Oops!");
 	    });
   }
-
+  ionViewDidLoad(){
+    ScreenOrientation.lockOrientation('portrait');
+  }
   openListpage(id, title) {
     this.navCtrl.push(ListPage, {
           id: id,
