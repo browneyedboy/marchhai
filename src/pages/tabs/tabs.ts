@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Platform } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
@@ -15,7 +15,10 @@ export class TabsPage {
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
 
-  constructor() {
+  constructor(private platform: Platform) {
 
+  }
+  exitApp(){
+    this.platform.exitApp();
   }
 }

@@ -78,10 +78,10 @@ export class LoginPage {
     
     // watch network for a disconnect
 
-            if (this.is_paid == 1) {
-                this.viewCtrl.dismiss();
-                this.appCtrl.getRootNav().push(TabsPage);
-            }
+            // if (this.is_paid == 1) {
+            //     this.viewCtrl.dismiss();
+            //     this.appCtrl.getRootNav().push(TabsPage);
+            // }
 
 
 	var loginServiceData = {

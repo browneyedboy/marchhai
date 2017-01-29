@@ -16,6 +16,7 @@ declare var cordova: any;
   selector: 'page-lists',
   templateUrl: 'lists.html'
 })
+
 export class ListPage {
     contents: any;
     democontents: any;
@@ -23,13 +24,25 @@ export class ListPage {
     userdata: any;
     show: boolean;
     isbusy: any;
+    nodata: boolean;
 
     public database: SQLite;
     // public fileTransfer: Transfer;
 
-    constructor(public navCtrl: NavController, public params: NavParams , public http: Http, private toastCtrl: ToastController, private platform: Platform, public modalCtrl: ModalController) {
-
-
+    constructor(public navCtrl: NavController, public params: NavParams , 
+                public http: Http, private toastCtrl: ToastController, 
+                private platform: Platform, public modalCtrl: ModalController) {
+        this.nodata = false;
+        this.platform.ready().then(() => {
+            this.database = new SQLite();
+            this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
+                // this.refresh();
+            }, (error) => {
+                console.log("ERROR: ", error);
+            });
+        });
+    }
+    ionViewDidEnter(){
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
         ///index.php/api/contents?cat=<CATEGORY ID>&token=M@RCH@@KH@!@P!
         this.userdata = global.userdetailget();
@@ -39,6 +52,7 @@ export class ListPage {
         },
         err => {
             console.log("Oops!");
+            this.nodata = true;
         });
         this.isbusy = 0;
         this.show = false;
@@ -49,21 +63,12 @@ export class ListPage {
             },
             err => {
                 console.log("Oops!");
+                this.nodata = true;
             });
             this.show = true;
         }
 
         this.pagetitle = this.params.get('title');
-
-
-        this.platform.ready().then(() => {
-            this.database = new SQLite();
-            this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
-                // this.refresh();
-            }, (error) => {
-                console.log("ERROR: ", error);
-            });
-        });
     }
     playVideo(id, video){
     // http://www.marchaahai.mn/images/content/<CONTENT['id']>/<CONTENT['video']>

@@ -27,9 +27,6 @@ export class ContactPage {
         this.expire_word = 'Та марчаахайг ашиглах эрхтэй байна.';
     }
   }
-  exitApp(){
-    this.platform.exitApp();
-  }
   changepassword(){
   	this.navCtrl.push(ChangepassPage);
   }

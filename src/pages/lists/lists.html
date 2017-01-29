@@ -5,7 +5,13 @@
 </ion-header>
   
 <ion-content class="card-background-page listpage">
-
+    <ion-list no-lines>
+        <ion-item *ngIf="nodata" class="nodata">
+            <ion-icon name="ios-thunderstorm"></ion-icon>
+            <h2>Интернэт холболт тасарсан!</h2>
+        </ion-item>
+    </ion-list>
+    <div *ngIf="!nodata">
     <ion-card *ngFor="let content of contents">
         <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
         <div class="card-title">{{content.title}}</div>
@@ -28,9 +34,11 @@
           </button>
         </div>
     </ion-card>
+    </div>
 
     <div *ngIf="show">
-    <ion-card  *ngFor="let content of democontents">
+    <div *ngIf="!nodata" >
+    <ion-card *ngFor="let content of democontents">
         <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
         <div class="card-title">{{content.title}}</div>
         <div class="play">    
@@ -43,6 +51,8 @@
         </div>
     </ion-card>
     </div>
+    </div>
+
   
 
 </ion-content>

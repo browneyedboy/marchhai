@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Platform} from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen, SQLite } from 'ionic-native';
 
 import { WelcometabPage } from '../pages/welcometab/welcometab';
 // import { LoginPage } from '../pages/login/login';
+
 
 
 @Component({
@@ -47,3 +48,4 @@ export class MyApp {
         });
     }
 }
+

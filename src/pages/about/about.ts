@@ -16,6 +16,7 @@ export class AboutPage {
     cond: string = "saved";
     isAndroid: boolean = false;
     contents: any;
+    nodata: boolean;
 
     public database: SQLite;
     public videos: Array<Object>;
@@ -24,7 +25,8 @@ export class AboutPage {
     userdata: any;
 
     constructor(public navCtrl: NavController, public http: Http, private platform: Platform, public alertCtrl: AlertController) {
-  		this.userdata = global.userdetailget();
+  		this.nodata = false;
+        this.userdata = global.userdetailget();
         this.platform.ready().then(() => {
             this.database = new SQLite();
             this.database.openDatabase({name: "data.db", location: "default"}).then(() => {
@@ -35,7 +37,7 @@ export class AboutPage {
         });
         
     }
-    public ionViewDidLoad() {
+    public ionViewDidEnter() {
         this.refresh();
     }
 
@@ -82,6 +84,7 @@ export class AboutPage {
         },
         err => {
             console.log("Oops!");
+            this.nodata = true;
         });
        
         this.database.executeSql("SELECT * FROM videos2", []).then((data) => {

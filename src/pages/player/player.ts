@@ -20,21 +20,18 @@ export class PlayerPage {
             this.video = cordova.file.dataDirectory + this.params.get('video');
         }
   		console.log('player page');
-        this.tabBarElement = document.querySelector('#tabs12');
 
   	}
-  	ionViewDidLoad()
-    {
+    ionViewWillEnter(){
         ScreenOrientation.lockOrientation('landscape');
+    }
 
-        var video = document.getElementById("mvideo");
-        if (video.requestFullscreen) {
-        video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-        }
+    ionViewDidEnter(){
+        // document.getElementById("tabs12").style.display = 'none';
+        // let myDiv = document.getElementById('tabs12');
+        // myDiv.style.display = 'none';
 
-         this.tabBarElement.style.display = 'none';
+
 
     }
 
@@ -42,7 +39,7 @@ export class PlayerPage {
     {
         ScreenOrientation.lockOrientation('portrait');
         // ScreenOrientation.unlockOrientation();
-        this.tabBarElement.style.display = 'flex';
+        // document.getElementById("tabs12").style.display = 'flex';
     }
 
 }

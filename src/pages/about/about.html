@@ -1,7 +1,7 @@
 <ion-header>
     <ion-segment [(ngModel)]="cond">
       <ion-segment-button value="saved">
-        Хадгалсан
+        Дуртай
       </ion-segment-button>
       <ion-segment-button value="download">
         Татаж авсан
@@ -22,6 +22,7 @@
 
   <div [ngSwitch]="cond">
     <ion-list *ngSwitchCase="'saved'" no-lines>
+        <div *ngIf="!nodata">
         <ion-item  *ngFor="let content of contents">
             <ion-thumbnail item-left>
                 <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture">
@@ -33,6 +34,11 @@
             </div>
             <h2>{{content.title}}</h2>
             <ion-icon name="trash" item-right (click)="removefromfav(content.id)"></ion-icon>
+        </ion-item>
+        </div>
+        <ion-item *ngIf="nodata" class="nodata">
+            <ion-icon name="ios-thunderstorm"></ion-icon>
+            <h2>Интернэт холболт тасарсан!</h2>
         </ion-item>
     </ion-list>
 

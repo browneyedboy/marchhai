@@ -70,11 +70,35 @@ ion-tabs{
     .ion-md-help-circle{
         color:#fff !important;
     }
+    .ion-md-log-out{
+        color:#fff !important;
+    }
 }
 .button-md-primary {
     color: #fff !important;
 }
-
+.nodata ion-icon{
+    font-size: 95px;
+    padding: 10px;
+}
+.nodata{
+    text-align: center;
+    color: #fec20b;
+    margin-top: 30%;
+}
+.tabs-md .tab-button{
+    min-height: 70px !important;
+}
+.tabs-md .tab-button[aria-selected=true]{
+    background-color: rgba(255, 255, 0, 0.64) !important;
+    opacity: 1 !important;
+}
+.tabs-md .tab-button[aria-selected=true] .tab-button-text{
+    color: red !important;
+}
+.picker-md .picker-prefix, .picker-md .picker-suffix, .picker-md .picker-opt-selected {
+    color: #605AE8 !important;
+}
 
 
 

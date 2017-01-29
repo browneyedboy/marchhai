@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 
 import { DemoPage } from '../demo/demo';
 import { LoginPage } from '../login/login';
@@ -19,10 +19,12 @@ export class WelcometabPage {
   	tab2Root: any = LoginPage;
   	tab3Root: any = HelpPage;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private platform: Platform) {}
 
   ionViewDidLoad() {
     console.log('Hello WelcometabPage Page');
   }
-
+  exitApp(){
+    this.platform.exitApp();
+  }
 }
