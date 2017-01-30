@@ -33,7 +33,9 @@ import { ForgotpassPage } from "../pages/forgotpass/forgotpass";
     ForgotpassPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+        tabsHideOnSubPages: true
+    }, {})
   ],
   bootstrap: [IonicApp],
   entryComponents: [

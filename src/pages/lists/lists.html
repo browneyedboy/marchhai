@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="{{theColor}}">
   <ion-navbar>
     <ion-title>{{ pagetitle }}</ion-title>
   </ion-navbar>
@@ -16,7 +16,7 @@
         <img [src]="'http://www.marchaahai.mn/images/content/'+content.id+'/'+content.picture" />
         <div class="card-title">{{content.title}}</div>
         <div class="play">    
-            <button ion-button icon-only clear large (click)="playVideo(content.id ,content.video)">
+            <button ion-button icon-only clear large (click)="playVideo(content.id ,content.video, content.title)">
                 <ion-icon name="play"></ion-icon>
             </button>
         </div>

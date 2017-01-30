@@ -10,12 +10,14 @@ declare var cordova: any;
 })
 export class PlayerPage {
 	video: any;
+    title: string;
 	tabBarElement:any;
   	constructor(public navCtrl: NavController, public params: NavParams, platform: Platform) {
   		//http://www.marchaahai.mn/images/content/<CONTENT['id']>/<CONTENT['video']>
   		console.log(this.video = this.params.get('video'));
         if (this.params.get('id')!=0) {
             this.video = 'http://www.marchaahai.mn/images/content/'+this.params.get('id')+'/'+this.params.get('video');
+            this.title = this.params.get('title');
         }else{
             this.video = cordova.file.dataDirectory + this.params.get('video');
         }

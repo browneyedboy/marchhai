@@ -25,6 +25,7 @@ export class ListPage {
     show: boolean;
     isbusy: any;
     nodata: boolean;
+    theColor: string;
 
     public database: SQLite;
     // public fileTransfer: Transfer;
@@ -43,6 +44,25 @@ export class ListPage {
         });
     }
     ionViewDidEnter(){
+        if (this.params.get('id') == 1) {
+            this.theColor = 'color089cf7';
+        }
+        if (this.params.get('id') == 7) {
+            this.theColor = 'color7e2d00';
+        }
+        if (this.params.get('id') == 3) {
+            this.theColor = 'color3aad04';
+        }
+        if (this.params.get('id') == 5) {
+            this.theColor = 'color0430a0';
+        }
+        if (this.params.get('id') == 8) {
+            this.theColor = 'colorff0000';
+        }
+        if (this.params.get('id') == 2) {
+            this.theColor = 'colorae000c';
+        }
+
         //http://www.marchaahai.mn/index.php/api/contents?cat=1&is_paid=1&limit=20&token=M@RCH@@KH@!@P!
         ///index.php/api/contents?cat=<CATEGORY ID>&token=M@RCH@@KH@!@P!
         this.userdata = global.userdetailget();
@@ -70,11 +90,12 @@ export class ListPage {
 
         this.pagetitle = this.params.get('title');
     }
-    playVideo(id, video){
+    playVideo(id, video, title){
     // http://www.marchaahai.mn/images/content/<CONTENT['id']>/<CONTENT['video']>
   	this.navCtrl.push(PlayerPage, {
           id: id,
-          video: video
+          video: video,
+          title: title
       });
     // let modal = this.modalCtrl.create(PlayerPage, {
     //     id: id,

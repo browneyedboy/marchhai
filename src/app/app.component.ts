@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen, SQLite } from 'ionic-native';
 
 import { WelcometabPage } from '../pages/welcometab/welcometab';
-// import { LoginPage } from '../pages/login/login';
+// import { PlayerPage } from '../pages/player/player';
 
 
 
