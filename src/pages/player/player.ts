@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { ScreenOrientation } from 'ionic-native';
 
@@ -12,6 +12,8 @@ export class PlayerPage {
 	video: any;
     title: string;
 	tabBarElement:any;
+    @Input() src : string
+    @ViewChild('player') player;
   	constructor(public navCtrl: NavController, public params: NavParams, platform: Platform) {
   		//http://www.marchaahai.mn/images/content/<CONTENT['id']>/<CONTENT['video']>
   		console.log(this.video = this.params.get('video'));
@@ -36,12 +38,14 @@ export class PlayerPage {
 
 
     }
-
+   
     ionViewWillLeave()
     {
         ScreenOrientation.lockOrientation('portrait');
         // ScreenOrientation.unlockOrientation();
         // document.getElementById("tabs12").style.display = 'flex';
+        this.player.nativeElement.src = '';
+        this.player.nativeElement.load();
     }
 
 }
